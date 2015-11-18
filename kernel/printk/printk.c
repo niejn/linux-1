@@ -632,6 +632,10 @@ static int log_store(int facility, int level,
 	log_next_idx += msg->len;
 	log_next_seq++;
 
+	{
+	extern void v7_flush_kern_dcache_area(void *addr, size_t size);
+	v7_flush_kern_dcache_area(log_buf, log_buf_len);
+	}
 	return msg->text_len;
 }
 
